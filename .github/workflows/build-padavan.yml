@@ -1,5 +1,5 @@
-#修改TNAME: K2P 中的K2P为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
-name: Build Padavan
+
+name: Build Padavan for R2100
 
 on: 
   release:
@@ -32,13 +32,11 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
     - name: Clone source code
       env:
-        KERNEL: 3.4
+        KERNEL: 4.4
       run: |
         if [ $KERNEL = "4.4" ] ; then
         git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rt-n56u
         else
-        #git clone --depth=1 https://e.coding.net/hanwckf/rt-n56u/padavan.git /opt/rt-n56u
-        #git clone --depth=1 https://github.com/keke1023/Padavan.git /opt/rt-n56u
         git clone --depth=1 https://github.com/licheedev/Padavan-3.4.git /opt/rt-n56u
         fi
         cd /opt/rt-n56u/toolchain-mipsel
@@ -46,8 +44,8 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: RM2100
-        KERNEL: 3.4
+        TNAME: R2100
+        KERNEL: 4.4
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
